@@ -2,15 +2,11 @@ package DTO;
 
 import java.util.Date;
 
-public class Personne {
+public abstract class Personne {
     protected String nom;
     protected String prenom;
     protected Date dateNaissance;
     protected String telephone;
-
-    //construct
-
-    public Personne() {}
 
     // Getters et setters
     public String getNom() {
