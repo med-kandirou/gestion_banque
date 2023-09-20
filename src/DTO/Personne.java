@@ -3,13 +3,12 @@ package DTO;
 import java.util.Date;
 
 public class Personne {
-    private String nom;
-    private String prenom;
-    private Date dateNaissance;
-    private String telephone;
+    protected String nom;
+    protected String prenom;
+    protected Date dateNaissance;
+    protected String telephone;
 
     //construct
-
 
     public Personne() {}
 

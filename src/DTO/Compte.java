@@ -3,10 +3,10 @@ package DTO;
 import java.util.Date;
 
 public class Compte {
-    private String code;
-    private double solde;
-    private Date dateCreation;
-    private String etat;
+    protected String code;
+    protected double solde;
+    protected Date dateCreation;
+    protected String etat;
 
     // Constructeur
     public Compte() {}
