@@ -8,6 +8,12 @@ public class Compte {
     protected Date dateCreation;
     protected String etat;
 
+    protected Client client;
+
+    protected Employe employe;
+
+
+
     // Constructeur
     public Compte() {}
 
@@ -28,7 +34,15 @@ public class Compte {
         return etat;
     }
 
-    // Setters (si nécessaire)
+    public Client getClient() {
+        return client;
+    }
+
+    public Employe getEmploye() {
+        return employe;
+    }
+
+    // Setters
     public void setCode(String code) {
         this.code = code;
     }
@@ -43,6 +57,12 @@ public class Compte {
 
     public void setEtat(String etat) {
         this.etat = etat;
+    }
+    public void setClient(Client client) {
+        this.client = client;
+    }
+    public void setEmploye(Employe employe) {
+        this.employe = employe;
     }
 
 }

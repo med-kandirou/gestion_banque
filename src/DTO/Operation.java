@@ -11,6 +11,27 @@ public class Operation {
     private Date dateCreation;
     private Double montant;
     private Type type;
+
+    private Employe employe;
+
+    private Compte compte;
+
+    public Compte getCompte() {
+        return compte;
+    }
+
+    public void setCompte(Compte compte) {
+        this.compte = compte;
+    }
+
+    public Employe getEmploye() {
+        return employe;
+    }
+
+    public void setEmploye(Employe employe) {
+        this.employe = employe;
+    }
+
     public Type getType() {
         return type;
     }
