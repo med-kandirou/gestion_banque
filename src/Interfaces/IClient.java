@@ -3,10 +3,6 @@ package Interfaces;
 import DTO.Client;
 
 public interface IClient {
-    Client ajouter();
-    int supprimer();
-    Client[] afficher();
-    Client update();
-    Client findByCode();
-    Client findByAttribute();
+    Client ajouter(Client client);
+    int supprimer(Client client);
 }

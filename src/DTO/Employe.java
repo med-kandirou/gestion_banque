@@ -2,7 +2,7 @@ package DTO;
 
 import java.util.Date;
 
-public class Employe {
+public class Employe extends Personne{
     private String matricule;
     private Date dateDeRecrutement;
     private String adresseEmail;

@@ -2,14 +2,8 @@ package Interfaces;
 
 import DTO.Employe;
 
-public interface IEmploye {
-    public interface EmployeRepository {
-        Employe ajouter();
-        int supprimer();
-        Employe[] showAll();
-        Employe update();
-        Employe findByMatricule();
-        Employe findByAtt();
-    }
+import java.util.Optional;
 
+public interface IEmploye {
+    Optional<Employe> ajouter (Employe employe);
 }
