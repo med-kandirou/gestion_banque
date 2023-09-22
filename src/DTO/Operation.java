@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class Operation {
     private String numero;
-    private Date dateCreation;
+    private Date dateOperation;
     private Double montant;
     private Type type;
 
@@ -48,16 +48,16 @@ public class Operation {
         return numero;
     }
 
-    public Date getDateCreation() {
-        return dateCreation;
+    public Date getDateOperation() {
+        return dateOperation;
     }
 
     public void setNumero(String numero) {
         this.numero = numero;
     }
 
-    public void setDateCreation(Date dateCreation) {
-        this.dateCreation = dateCreation;
+    public void setDateOperation(Date dateOperation) {
+        this.dateOperation = dateOperation;
     }
 
     public void setMontant(Double montant) {

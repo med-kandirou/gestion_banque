@@ -4,12 +4,13 @@ import Config.Database;
 import DTO.Client;
 import DTO.Compte;
 import DTO.Employe;
+import Interfaces.IClient;
 import Interfaces.ICompte;
 
 import java.sql.*;
 import java.util.Optional;
 
-public class Impclient implements ICompte {
+public class Impclient implements IClient {
     Connection cnx= Database.getconn();
     @Override
     public Optional<Client> ajouter(Client client) {
