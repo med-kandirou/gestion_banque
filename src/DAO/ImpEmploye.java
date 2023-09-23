@@ -1,12 +1,15 @@
 package DAO;
 
 import Config.Database;
+import DTO.Client;
 import DTO.Employe;
 import DTO.Personne;
 import Interfaces.IPersonne;
 
 import java.sql.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -80,4 +83,39 @@ public class ImpEmploye implements IPersonne {
         }
         return Optional.empty();
     }
+
+    @Override
+    public Optional<Personne[]> afficherListe() {
+        List<Employe> employes= new ArrayList<>();
+        try {
+            String selectSql = "SELECT * FROM employe";
+            PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                Employe emp=new Employe();
+                emp.setNom(resultSet.getString("nom"));
+                emp.setPrenom(resultSet.getString("prenom"));
+                emp.setTelephone(resultSet.getString("telephone"));
+                emp.setDateNaissance(resultSet.getDate("datenaissance"));
+                emp.setAdresseEmail(resultSet.getString("adresseemail"));
+                emp.setDateDeRecrutement(resultSet.getDate("datederecrutement"));
+                employes.add(emp);
+            }
+            resultSet.close();
+            preparedStatement.close();
+            Personne[] arrayPers = employes.toArray(new Employe[0]);
+            return Optional.of(arrayPers);
+        }
+        catch (SQLException e){
+            System.out.print(e.getMessage());
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Personne> update() {
+        return Optional.empty();
+    }
+
+
 }
