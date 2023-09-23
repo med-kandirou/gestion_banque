@@ -4,8 +4,10 @@ import java.util.Date;
 
 public abstract class Personne {
     protected String nom;
+
     protected String prenom;
     protected Date dateNaissance;
+
     protected String telephone;
 
     // Getters et setters
@@ -40,5 +42,7 @@ public abstract class Personne {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+
+
 
 }
