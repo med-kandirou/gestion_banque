@@ -11,9 +11,11 @@ public interface IPersonne {
 
     Optional<Personne> supprimer (Personne personne);
 
-    Optional<Personne> chercherbyCode (Personne personne);
+    Optional<Personne> chercherbyCode (String code);
 
-    Optional<Personne[]> afficherListe ();
+    Optional<Personne[]> afficherListe();
+
+    Optional<Personne[]> rechercheParAtt(Personne personne);
 
     Optional<Personne> update();
 

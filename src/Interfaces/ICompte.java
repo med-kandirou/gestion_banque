@@ -7,9 +7,14 @@ import DTO.Employe;
 import java.util.Optional;
 
 public interface ICompte {
-    Optional<Compte> ajouter (Compte compte);
+    Optional<Compte> ajoutercourant (Compte c);
+
+    Optional<Compte> ajouterepargne (Compte c);
 
     Optional<Compte> supprimer (Compte compte);
 
-    Optional<Compte> chercherbyCode (Compte compte);
+    Optional<Compte[]> chercherbyClient (Client client);
+    Optional<Compte> changerStatut (Compte compte);
+
+
 }

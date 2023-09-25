@@ -261,6 +261,6 @@ public class Menu {
                     System.out.println("Choix invalide");
                     break;
             }
-        }while (quitter==true);
+        }while (quitter==false);
     }
 }

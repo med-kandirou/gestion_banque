@@ -1,14 +1,13 @@
 package DAO;
 
 import Config.Database;
+import DTO.Client;
 import DTO.Mission;
 import DTO.Operation;
 import Interfaces.IMission;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class ImpMission implements IMission {
@@ -45,6 +44,31 @@ public class ImpMission implements IMission {
                 return Optional.ofNullable(mission);
             }
             preparedStatement.close();
+        }
+        catch (SQLException e){
+            System.out.print(e.getMessage());
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Mission[]> afficherList() {
+        ArrayList<Mission> missions = new ArrayList<>();
+        try {
+            String selectSql = "SELECT * FROM mission";
+            PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                Mission mission =new Mission();
+                mission.setCode(resultSet.getString("code"));
+                mission.setNom(resultSet.getString("nom"));
+                mission.setDescription(resultSet.getString("description"));
+                missions.add(mission);
+            }
+            resultSet.close();
+            preparedStatement.close();
+            Mission[] arrayMission = missions.toArray(new Mission[0]);
+            return Optional.ofNullable(arrayMission);
         }
         catch (SQLException e){
             System.out.print(e.getMessage());

@@ -11,5 +11,5 @@ public interface IOperation {
 
     Optional<Operation> supprimer (Operation operation);
 
-    Optional<List<Operation>> chercherbyNum (Operation operation);
+    Optional<Operation> chercherbyNum (Operation operation);
 }

@@ -24,28 +24,26 @@ create table Employe (
                          adresseEmail varchar(50) not null
 );
 
+create table compte(
+                code varchar(20) primary key,
+                solde float not null,
+                dateCreation date not null ,
+                etat etat not null,
+                client_id varchar(20) not null,
+                Emp_mat varchar(20) not null,
+                foreign key (client_id) references client(code) on delete cascade on update cascade,
+                foreign key (Emp_mat) references employe(matricule) on delete cascade on update cascade)
+;
+
 create table CompteCourant (
-                               code varchar(20) primary key,
-                               solde float not null,
-                               dateCreation date not null ,
-                               etat etat not null,
-                               decouvert float not null,
-                               client_id varchar(20) not null,
-                               Emp_mat varchar(20) not null,
-                               foreign key (client_id) references client(code) on delete cascade on update cascade,
-                               foreign key (Emp_mat) references employe(matricule) on delete cascade on update cascade
+                code varchar(20) primary key,
+                decouvert float not null,
+                foreign key (code) references Compte(code) on delete cascade on update cascade
 );
 create table CompteEpargne (
-                               code varchar(20) primary key,
-                               solde float not null,
-                               dateCreation date not null ,
-                               etat etat not null,
-                               decouvert float not null,
-                               taux float not null,
-                               client_id varchar(20) not null,
-                               Emp_mat varchar(20) not null,
-                               foreign key (client_id) references client(code) on delete cascade on update cascade,
-                               foreign key (Emp_mat) references employe(matricule) on delete cascade on update cascade
+                code varchar(20) primary key,
+                taux float not null,
+                foreign key (code) references Compte(code) on delete cascade on update cascade
 );
 
 create table Mission (

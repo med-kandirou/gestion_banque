@@ -2,11 +2,20 @@ package DTO;
 
 import java.util.Date;
 
-public class MissionEmploye {
+public class Affectation {
 
+    private Integer id;
     private Employe employe;
     private Mission mission;
     private Date dateChangement;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Employe getEmploye() {
         return employe;

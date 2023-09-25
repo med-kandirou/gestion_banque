@@ -1,6 +1,7 @@
 package DAO;
 
 import Config.Database;
+import DTO.Client;
 import DTO.Compte;
 import DTO.Employe;
 import DTO.Operation;
@@ -56,26 +57,27 @@ public class ImpOperation implements IOperation {
     }
 
     @Override
-    public Optional<List<Operation>> chercherbyNum(Operation operation) {
-        List<Operation> ops= new ArrayList<>();
+    public Optional<Operation> chercherbyNum(Operation operation) {
         try {
             String selectSql = "SELECT * FROM operation WHERE numero like '"+operation.getNumero()+"'";
             PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
-                Operation op =new Operation();
-                Compte compte =new Compte();
-                Compte client =new Compte();
                 Employe employe =new Employe();
-                op.setDateOperation(resultSet.getDate("dateoperation"));
-                op.setMontant(resultSet.getDouble("montant"));
+                Compte clt = new Compte();
+                operation.setDateOperation(resultSet.getDate("dateoperation"));
+                operation.setMontant(resultSet.getDouble("montant"));
                 if(resultSet.getString("type")=="retrait"){
                     operation.setType(Type.retrait);
                 }
                 else {
                     operation.setType(Type.versement);
                 }
-                return Optional.empty();
+                employe.setMatricule(resultSet.getString("emp_mat"));
+                clt.setCode(resultSet.getString("compte_id"));
+                operation.setEmploye(employe);
+                operation.setCompte(clt);
+                return Optional.ofNullable(operation);
             }
             resultSet.close();
             preparedStatement.close();
