@@ -1,6 +1,7 @@
 package DTO;
 
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 
 public abstract class Personne {
     protected String nom;
@@ -27,12 +28,11 @@ public abstract class Personne {
         this.prenom = prenom;
     }
 
-    public Date getDateNaissance() {
-        return dateNaissance;
+    public java.sql.Date getDateNaissance() {
+        return (java.sql.Date) dateNaissance;
     }
 
-    public void setDateNaissance(Date dateNaissance) {
-        this.dateNaissance = dateNaissance;
+    public void setDateNaissance(Date dateNaissance) {this.dateNaissance = dateNaissance;
     }
 
     public String getTelephone() {

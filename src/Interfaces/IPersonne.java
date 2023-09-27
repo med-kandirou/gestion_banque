@@ -17,6 +17,6 @@ public interface IPersonne {
 
     Optional<Personne[]> rechercheParAtt(Personne personne);
 
-    Optional<Personne> update();
+    Optional<Personne> update(Personne personne);
 
 }

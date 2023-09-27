@@ -1,5 +1,6 @@
 package DTO;
 
+
 import java.util.Date;
 
 public class Employe extends Personne{
@@ -19,8 +20,8 @@ public class Employe extends Personne{
         this.matricule = matricule;
     }
 
-    public Date getDateDeRecrutement() {
-        return dateDeRecrutement;
+    public java.sql.Date getDateDeRecrutement() {
+        return (java.sql.Date) this.dateDeRecrutement;
     }
 
     public void setDateDeRecrutement(Date dateDeRecrutement) {

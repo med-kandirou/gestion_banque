@@ -7,6 +7,7 @@ import DTO.Personne;
 import Interfaces.IPersonne;
 
 import java.sql.*;
+import java.util.Date;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +26,9 @@ public class ImpEmploye implements IPersonne {
             preparedStatement.setString(1, emp.getMatricule());
             preparedStatement.setString(2, emp.getNom());
             preparedStatement.setString(3,emp.getPrenom());
-            preparedStatement.setDate(4, (Date) emp.getDateNaissance());
+            preparedStatement.setDate(4, emp.getDateNaissance());
             preparedStatement.setString(5,emp.getTelephone());
-            preparedStatement.setDate(6, (Date) emp.getDateDeRecrutement());
+            preparedStatement.setDate(6,emp.getDateDeRecrutement());
             preparedStatement.setString(7,emp.getAdresseEmail());
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
@@ -123,9 +124,9 @@ public class ImpEmploye implements IPersonne {
             preparedStatement.setString(1, emp.getMatricule());
             preparedStatement.setString(2, emp.getNom());
             preparedStatement.setString(3, emp.getPrenom());
-            preparedStatement.setDate(4,(Date) emp.getDateNaissance());
+            preparedStatement.setDate(4,emp.getDateNaissance());
             preparedStatement.setString(5, emp.getTelephone());
-            preparedStatement.setDate(6,(Date) emp.getDateDeRecrutement());
+            preparedStatement.setDate(6,emp.getDateDeRecrutement());
             preparedStatement.setString(7,emp.getAdresseEmail());
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
@@ -151,7 +152,27 @@ public class ImpEmploye implements IPersonne {
     }
 
     @Override
-    public Optional<Personne> update() {
+    public Optional<Personne> update(Personne personne) {
+        Employe emp=(Employe) personne;
+        try {
+            String updatequery = "UPDATE employe SET nom = ?, prenom = ?,datenaissance = ? ,telephone = ?,datederecrutement = ?, adresseemail = ? WHERE matricule like ?;";
+            PreparedStatement preparedStatement = cnx.prepareStatement(updatequery);
+            preparedStatement.setString(1, emp.getNom());
+            preparedStatement.setString(2, emp.getPrenom());
+            preparedStatement.setDate(3, emp.getDateNaissance());
+            preparedStatement.setString(4, emp.getTelephone());
+            preparedStatement.setDate(5, emp.getDateDeRecrutement());
+            preparedStatement.setString(6,emp.getAdresseEmail());
+            preparedStatement.setString(7,emp.getMatricule());
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                return Optional.ofNullable(emp);
+            }
+            preparedStatement.close();
+        }
+        catch (SQLException e){
+            System.out.print(e.getMessage());
+        }
         return Optional.empty();
     }
 

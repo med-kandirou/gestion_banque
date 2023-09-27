@@ -62,11 +62,13 @@ create table Operation (
                            FOREIGN KEY (compte_id) REFERENCES CompteCourant(code) ON DELETE CASCADE ON UPDATE CASCADE ,
                            FOREIGN KEY (compte_id) REFERENCES CompteEpargne(code) ON DELETE CASCADE ON UPDATE CASCADE
 );
-create table MissionEmploye(
-                               Emp_mat varchar(20),
-                               codeMission int,
-                               dateChangement date not null,
-                               primary key (Emp_mat,codeMission),
-                               foreign key (Emp_mat) references Employe(matricule) on delete cascade on update cascade,
-                               foreign key (codeMission) references Mission(code) on delete cascade on update cascade
+create table affectation(
+                            id serial,
+                            Emp_mat varchar(20),
+                            codeMission int,
+                            dateChangement date not null,
+                            primary key (id,Emp_mat,codeMission),
+                            foreign key (Emp_mat) references Employe(matricule) on delete cascade on update cascade,
+                            foreign key (codeMission) references Mission(code) on delete cascade on update cascade
 );
+
