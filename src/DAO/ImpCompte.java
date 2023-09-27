@@ -6,6 +6,7 @@ import Interfaces.ICompte;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class ImpCompte implements ICompte {
@@ -136,6 +137,122 @@ public class ImpCompte implements ICompte {
             preparedStatement.close();
             //Compte[] arrayCompte= comptes.toArray(new Compte[0]);
             //return Optional.ofNullable(arrayCompte);
+        }
+        catch (SQLException e){
+            System.out.print(e.getMessage());
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Compte[]> afficherList() {
+        List<Compte> Comptes= new ArrayList<>();
+        try {
+            String selectSql = "SELECT * FROM compte";
+            PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                Compte compte=new Compte();
+                compte.setCode(resultSet.getString("code"));
+                compte.setSolde(resultSet.getDouble("solde"));
+                compte.setDateCreation(resultSet.getDate("datecreation"));
+                compte.setEtat(resultSet.getString("etat"));
+                Client c= new Client();
+                c.setCode(resultSet.getString("client_id"));
+                compte.setClient(c);
+                Employe emp= new Employe();
+                emp.setMatricule(resultSet.getString("emp_mat"));
+                compte.setEmploye(emp);
+            }
+            resultSet.close();
+            preparedStatement.close();
+            Compte[] arrayComp = Comptes.toArray(new Compte[0]);
+            return Optional.of(arrayComp);
+        }
+        catch (SQLException e){
+            System.out.print(e.getMessage());
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Compte> update(Compte compte) {
+        try {
+            String updatequery = "UPDATE compte SET solde = ?,etat = ? WHERE code like ?;";
+            PreparedStatement preparedStatement = cnx.prepareStatement(updatequery);
+            preparedStatement.setDouble(1, compte.getSolde());
+            preparedStatement.setString(2,compte.getEtat());
+            preparedStatement.setString(3, compte.getCode());
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                return Optional.ofNullable(compte);
+            }
+            preparedStatement.close();
+        }
+        catch (SQLException e){
+            System.out.print(e.getMessage());
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Compte[]> afficheParStatut(String statut) {
+        List<Compte> Comptes= new ArrayList<>();
+        try {
+            String selectSql = "SELECT * FROM compte WHERE etat like ?";
+            PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
+            preparedStatement.setString(1, statut);
+            preparedStatement = cnx.prepareStatement(selectSql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                Compte compte=new Compte();
+                compte.setCode(resultSet.getString("code"));
+                compte.setSolde(resultSet.getDouble("solde"));
+                compte.setDateCreation(resultSet.getDate("datecreation"));
+                compte.setEtat(resultSet.getString("etat"));
+                Client c= new Client();
+                c.setCode(resultSet.getString("client_id"));
+                compte.setClient(c);
+                Employe emp= new Employe();
+                emp.setMatricule(resultSet.getString("emp_mat"));
+                compte.setEmploye(emp);
+            }
+            resultSet.close();
+            preparedStatement.close();
+            Compte[] arrayComp = Comptes.toArray(new Compte[0]);
+            return Optional.of(arrayComp);
+        }
+        catch (SQLException e){
+            System.out.print(e.getMessage());
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Compte[]> afficheParDate(Date date) {
+        List<Compte> Comptes= new ArrayList<>();
+        try {
+            String selectSql = "SELECT * FROM compte WHERE datecreation = ?";
+            PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
+            preparedStatement.setDate(1, date);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                Compte compte=new Compte();
+                compte.setCode(resultSet.getString("code"));
+                compte.setSolde(resultSet.getDouble("solde"));
+                compte.setDateCreation(resultSet.getDate("datecreation"));
+                compte.setEtat(resultSet.getString("etat"));
+                Client c= new Client();
+                c.setCode(resultSet.getString("client_id"));
+                compte.setClient(c);
+                Employe emp= new Employe();
+                emp.setMatricule(resultSet.getString("emp_mat"));
+                compte.setEmploye(emp);
+            }
+            resultSet.close();
+            preparedStatement.close();
+            Compte[] arrayComp = Comptes.toArray(new Compte[0]);
+            return Optional.of(arrayComp);
         }
         catch (SQLException e){
             System.out.print(e.getMessage());

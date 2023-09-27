@@ -1,9 +1,13 @@
 package Config;
 
+import DTO.Employe;
+import services.SEmploye;
+
 import java.util.Scanner;
 
 public class Menu {
-    public static void menu(){
+    SEmploye semploye= new SEmploye();
+    public void menu(){
         boolean quitter=false;
         System.out.printf("Welcome to EasyBank!");
         do {
@@ -30,13 +34,11 @@ public class Menu {
                         System.out.println("6. Chercher un employé");
                         System.out.println("7. Retour");
                         System.out.println("Votre choix: ");
-                        //get the user input
                         Scanner sc1 = new Scanner(System.in);
                         int choice1 = sc1.nextInt();
                         switch (choice1) {
                             case 1:
-                                System.out.println("< Administration des employés >");
-                                System.out.println("Ajouter un employé");
+                                semploye.ajouterEmploye();
                                 break;
                             case 2:
                                 System.out.println("Modifier un employé");
@@ -77,7 +79,6 @@ public class Menu {
                         System.out.println("6. Chercher un client");
                         System.out.println("7. Retour");
                         System.out.println("Votre choix: ");
-                        //get the user input
                         Scanner sc2 = new Scanner(System.in);
                         int choice2 = sc2.nextInt();
                         switch (choice2) {

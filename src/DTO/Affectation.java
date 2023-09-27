@@ -3,7 +3,6 @@ package DTO;
 import java.util.Date;
 
 public class Affectation {
-
     private Integer id;
     private Employe employe;
     private Mission mission;

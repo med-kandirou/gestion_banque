@@ -2,6 +2,7 @@ package DAO;
 
 import Config.Database;
 import DTO.Client;
+import DTO.Employe;
 import DTO.Personne;
 import Interfaces.IPersonne;
 
@@ -89,7 +90,7 @@ public class Impclient implements IPersonne {
             String selectSql = "SELECT * FROM client";
             PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            while (resultSet.next()){
                 Client client=new Client();
                 client.setNom(resultSet.getString("nom"));
                 client.setPrenom(resultSet.getString("prenom"));
@@ -145,7 +146,26 @@ public class Impclient implements IPersonne {
     }
 
     @Override
-    public Optional<Personne> update() {
+    public Optional<Personne> update(Personne personne) {
+        client=(Client) personne;
+        try {
+            String updatequery = "UPDATE client SET nom = ?, prenom = ?,datenaissance = ? ,telephone = ?,adresse = ? WHERE code like ?;";
+            PreparedStatement preparedStatement = cnx.prepareStatement(updatequery);
+            preparedStatement.setString(1, client.getNom());
+            preparedStatement.setString(2, client.getPrenom());
+            preparedStatement.setDate(3,(Date) client.getDateNaissance());
+            preparedStatement.setString(4, client.getTelephone());
+            preparedStatement.setString(5,client.getAdresse());
+            preparedStatement.setString(6,client.getCode());
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                return Optional.ofNullable(client);
+            }
+            preparedStatement.close();
+        }
+        catch (SQLException e){
+            System.out.print(e.getMessage());
+        }
         return Optional.empty();
     }
 
