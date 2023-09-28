@@ -16,7 +16,6 @@ public class Client extends Personne{
         this.code = code;
     }
 
-    // Getters et setters pour l'attribut "adresse"
     public String getAdresse() {
         return adresse;
     }

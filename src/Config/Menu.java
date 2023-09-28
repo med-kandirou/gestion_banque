@@ -1,12 +1,14 @@
 package Config;
 
 import DTO.Employe;
+import services.SClient;
 import services.SEmploye;
 
 import java.util.Scanner;
 
 public class Menu {
     SEmploye semploye= new SEmploye();
+    SClient sclient= new SClient();
     public void menu(){
         boolean quitter=false;
         System.out.printf("Welcome to EasyBank!");
@@ -83,7 +85,7 @@ public class Menu {
                         int choice2 = sc2.nextInt();
                         switch (choice2) {
                             case 1:
-                                System.out.println("Ajouter un client");
+                                sclient.ajouterClient();
                                 break;
                             case 2:
                                 System.out.println("Modifier un client");
