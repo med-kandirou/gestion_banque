@@ -2,6 +2,7 @@ package Config;
 
 import DTO.Employe;
 import services.SClient;
+import services.SCompte;
 import services.SEmploye;
 import services.Smission;
 
@@ -11,6 +12,7 @@ public class Menu {
     SEmploye semploye= new SEmploye();
     SClient sclient= new SClient();
     Smission smission=new Smission();
+    SCompte scompte=new SCompte();
     public void menu(){
         boolean quitter=false;
         System.out.printf("Welcome to EasyBank!");
@@ -145,7 +147,7 @@ public class Menu {
                                 System.out.println("Changement de statut");
                                 break;
                             case 4:
-                                System.out.println("Supprimer un compte");
+                                scompte.supprierCompte();
                                 break;
                             case 5:
                                 System.out.println("Afficher tous les comptes");
