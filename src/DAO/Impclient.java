@@ -39,14 +39,13 @@ public class Impclient implements IClient {
 
     public Optional<Client> supprimer(Client client) {
         try {
-            String deleteSql = "DELETE FROM compte WHERE code = ?";
+            String deleteSql = "DELETE FROM client WHERE code = ?";
             PreparedStatement preparedStatement = cnx.prepareStatement(deleteSql);
             preparedStatement.setString(1, client.getCode());
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 return Optional.ofNullable(client);
             }
-            preparedStatement.close();
         }
         catch (SQLException e){
             System.out.print(e.getMessage());

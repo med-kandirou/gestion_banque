@@ -91,7 +91,7 @@ public class Menu {
                                 System.out.println("Modifier un client");
                                 break;
                             case 3:
-                                System.out.println("Supprimer un client");
+                                sclient.supprierClient();
                                 break;
                             case 4:
                                 System.out.println("Afficher tous les clients");

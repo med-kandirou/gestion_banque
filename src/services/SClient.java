@@ -43,8 +43,8 @@ public class SClient {
         client= new Client();
         System.out.print("Entrer matricule :");
         client.setCode(sc.nextLine());
-        Optional<Client> optionalEmp = impclient.supprimer(client);
-        optionalEmp.ifPresent(v -> System.out.println(String.format("*****  CLIENT SUPPRIME  *****")));
+        Optional<Client> optionalcl = impclient.supprimer(client);
+        optionalcl.ifPresent(v -> System.out.println(String.format("*****  CLIENT SUPPRIME  *****")));
     }
     public void chercherEmploye() {
         client= new Client();
