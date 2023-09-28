@@ -46,13 +46,13 @@ public class SClient {
         Optional<Client> optionalcl = impclient.supprimer(client);
         optionalcl.ifPresent(v -> System.out.println(String.format("*****  CLIENT SUPPRIME  *****")));
     }
-    public void chercherEmploye() {
+    public void chercherClientParCode() {
         client= new Client();
-        System.out.print("Entrer matricule :");
-        String matricule=sc.nextLine();
-        Optional<Client> optionalcl = impclient.chercherbyCode(matricule);
-        optionalcl.ifPresent(employe -> {
-            System.out.println(String.format(employe.getCode()+" "+employe.getNom()+" "+employe.getPrenom()+" "+employe.getDateNaissance()+" "+employe.getAdresse()));
+        System.out.print("Entrer code :");
+        String code=sc.nextLine();
+        Optional<Client> optionalcl = impclient.chercherbyCode(code);
+        optionalcl.ifPresent(client -> {
+            System.out.println(String.format(client.getCode()+" "+client.getNom()+" "+client.getPrenom()+" "+client.getDateNaissance()+" "+client.getAdresse()));
         });
     }
     public void afficherListe() {

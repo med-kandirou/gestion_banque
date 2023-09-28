@@ -97,7 +97,7 @@ public class Menu {
                                 System.out.println("Afficher tous les clients");
                                 break;
                             case 5:
-                                System.out.println("Chercher un client par code");
+                                sclient.chercherClientParCode();
                                 break;
                             case 6:
                                 System.out.println("Chercher un client");
