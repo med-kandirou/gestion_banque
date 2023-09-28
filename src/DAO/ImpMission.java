@@ -38,7 +38,7 @@ public class ImpMission implements IMission {
         try {
             String deleteSql = "DELETE FROM mission WHERE code = ?";
             PreparedStatement preparedStatement = cnx.prepareStatement(deleteSql);
-            preparedStatement.setString(1, mission.getCode());
+            preparedStatement.setInt(1,mission.getCode());
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 return Optional.ofNullable(mission);
@@ -60,7 +60,7 @@ public class ImpMission implements IMission {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 Mission mission =new Mission();
-                mission.setCode(resultSet.getString("code"));
+                mission.setCode(resultSet.getInt("code"));
                 mission.setNom(resultSet.getString("nom"));
                 mission.setDescription(resultSet.getString("description"));
                 missions.add(mission);

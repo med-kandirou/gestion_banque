@@ -229,7 +229,7 @@ public class Menu {
                                 smission.ajouterMission();
                                 break;
                             case 2:
-                                System.out.println("Supprimer une mission");
+                                smission.supprimerMission();
                                 break;
                             case 3:
                                 System.out.println("Afficher toutes les missions");

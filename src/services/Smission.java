@@ -24,4 +24,15 @@ public class Smission {
         Optional<Mission> optionalM = impMission.ajouter(mission);
         optionalM.ifPresent(v -> System.out.println(String.format("*****   AJOUT D'UN MISSION  *****")));
     }
+    public void supprimerMission() {
+        mission = new Mission();
+        System.out.print("Entrer un code :");
+        mission.setCode(sc.nextInt());
+        Optional<Mission> optionalM = impMission.supprimer(mission);
+        optionalM.ifPresent(v -> System.out.println(String.format("*****   MISSION SUPPRIMEE  *****")));
+    }
+
+
+
+
 }

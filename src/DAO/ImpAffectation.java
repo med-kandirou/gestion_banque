@@ -16,7 +16,7 @@ public class ImpAffectation implements IAffectation {
             // Create a PreparedStatement
             PreparedStatement preparedStatement = cnx.prepareStatement(insertSql);
             preparedStatement.setString(1, affectation.getEmploye().getMatricule());
-            preparedStatement.setString(2, affectation.getMission().getCode());
+            preparedStatement.setInt(2, affectation.getMission().getCode());
             preparedStatement.setDate(3,(Date) affectation.getDateChangement());
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
@@ -62,7 +62,7 @@ public class ImpAffectation implements IAffectation {
                 emp.setMatricule(resultSet.getString("emp_mat"));
                 affectation.setEmploye(emp);
                 Mission mission= new Mission();
-                mission.setCode(resultSet.getString("codemission"));
+                mission.setCode(resultSet.getInt("codemission"));
                 affectation.setMission(mission);
                 affectations.add(affectation);
             }
