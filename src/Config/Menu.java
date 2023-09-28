@@ -44,7 +44,7 @@ public class Menu {
                                 System.out.println("Modifier un employé");
                                 break;
                             case 3:
-                                System.out.println("Supprimer un employé");
+                                semploye.supprierEmploye();
                                 break;
                             case 4:
                                 System.out.println("Afficher tous les employés");

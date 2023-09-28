@@ -14,9 +14,10 @@ import java.util.Scanner;
 public class SEmploye {
 
     ImpEmploye impEmploye= new ImpEmploye();
+    Employe emp;
+    Scanner sc = new Scanner(System.in);
     public void ajouterEmploye() {
-        Scanner sc = new Scanner(System.in);
-        Employe emp = new Employe();
+        emp = new Employe();
         System.out.print("matricule :");
         emp.setMatricule(sc.nextLine());
         System.out.print("nom :");
@@ -47,7 +48,14 @@ public class SEmploye {
         emp.setDateDeRecrutement(new java.sql.Date(dateRecru.getTime()));
         Optional<Personne> optionalEmp = impEmploye.ajouter(emp);
         optionalEmp.ifPresent(v -> System.out.println(String.format("*****   AJOUT D'UN EMPLOI  *****")));
+    }
 
+    public void supprierEmploye() {
+        emp= new Employe();
+        System.out.print("Entrer matricule :");
+        emp.setMatricule(sc.nextLine());
+        Optional<Personne> optionalEmp = impEmploye.supprimer(emp);
+        optionalEmp.ifPresent(v -> System.out.println(String.format("*****  EMPLOI SUPPRIME  *****")));
     }
 
 }
