@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -46,7 +47,7 @@ public class SEmploye {
             parseException.printStackTrace();
         }
         emp.setDateDeRecrutement(new java.sql.Date(dateRecru.getTime()));
-        Optional<Personne> optionalEmp = impEmploye.ajouter(emp);
+        Optional<Employe> optionalEmp = impEmploye.ajouter(emp);
         optionalEmp.ifPresent(v -> System.out.println(String.format("*****   AJOUT D'UN EMPLOI  *****")));
     }
 
@@ -54,15 +55,33 @@ public class SEmploye {
         emp= new Employe();
         System.out.print("Entrer matricule :");
         emp.setMatricule(sc.nextLine());
-        Optional<Personne> optionalEmp = impEmploye.supprimer(emp);
+        Optional<Employe> optionalEmp = impEmploye.supprimer(emp);
         optionalEmp.ifPresent(v -> System.out.println(String.format("*****  EMPLOI SUPPRIME  *****")));
     }
     public void chercherEmploye() {
         emp= new Employe();
         System.out.print("Entrer matricule :");
         String matricule=sc.nextLine();
-        Optional<Personne> optionalEmp = impEmploye.chercherbyCode(matricule);
-        optionalEmp.ifPresent(v -> System.out.println(String.format(v.getNom()+v.getPrenom()+v.getDateNaissance())));
+        Optional<Employe> optionalEmp = impEmploye.chercherbyCode(matricule);
+        Optional<Employe> optionalEmploye = optionalEmp.map(emp -> (Employe) emp);
+        optionalEmploye.ifPresent(employe -> {
+            System.out.println(String.format(employe.getMatricule()+" "+employe.getNom()+" "+employe.getPrenom()+" "+employe.getDateNaissance()+" "+employe.getDateDeRecrutement()));
+        });
+    }
+    public void afficherListe() {
+        Optional<Employe[]> optionalEmp = impEmploye.afficherListe();
+        optionalEmp.ifPresent(employes -> {
+            for (Employe emp : employes) {
+                System.out.println(String.format(
+                        "%s %s %s %s %s",
+                        emp.getMatricule(),
+                        emp.getNom(),
+                        emp.getPrenom(),
+                        emp.getDateNaissance(),
+                        emp.getDateDeRecrutement()
+                ));
+            }
+        });
     }
 
 }

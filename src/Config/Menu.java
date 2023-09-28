@@ -47,7 +47,7 @@ public class Menu {
                                 semploye.supprierEmploye();
                                 break;
                             case 4:
-                                System.out.println("Afficher tous les employés");
+                                semploye.afficherListe();
                                 break;
                             case 5:
                                 semploye.chercherEmploye();
