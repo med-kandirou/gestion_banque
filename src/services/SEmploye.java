@@ -56,6 +56,7 @@ public class SEmploye {
         emp.setMatricule(sc.nextLine());
         Optional<Personne> optionalEmp = impEmploye.supprimer(emp);
         optionalEmp.ifPresent(v -> System.out.println(String.format("*****  EMPLOI SUPPRIME  *****")));
+
     }
 
 }
