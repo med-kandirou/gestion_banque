@@ -56,7 +56,13 @@ public class SEmploye {
         emp.setMatricule(sc.nextLine());
         Optional<Personne> optionalEmp = impEmploye.supprimer(emp);
         optionalEmp.ifPresent(v -> System.out.println(String.format("*****  EMPLOI SUPPRIME  *****")));
-
+    }
+    public void chercherEmploye() {
+        emp= new Employe();
+        System.out.print("Entrer matricule :");
+        String matricule=sc.nextLine();
+        Optional<Personne> optionalEmp = impEmploye.chercherbyCode(matricule);
+        optionalEmp.ifPresent(v -> System.out.println(String.format(v.getNom()+v.getPrenom()+v.getDateNaissance())));
     }
 
 }

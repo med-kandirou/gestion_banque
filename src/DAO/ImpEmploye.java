@@ -71,9 +71,9 @@ public class ImpEmploye implements IPersonne {
                 emp.setMatricule(resultSet.getString("matricule"));
                 emp.setNom(resultSet.getString("nom"));
                 emp.setPrenom(resultSet.getString("prenom"));
-                emp.setPrenom(resultSet.getString("datenaissance"));
                 emp.setTelephone(resultSet.getString("telephone"));
-                emp.setDateNaissance(resultSet.getDate("datederecrutement"));
+                emp.setDateNaissance(resultSet.getDate("datenaissance"));
+                emp.setDateDeRecrutement(resultSet.getDate("datederecrutement"));
                 emp.setAdresseEmail(resultSet.getString("adresseemail"));
             }
             resultSet.close();

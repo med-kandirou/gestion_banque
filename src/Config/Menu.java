@@ -50,7 +50,7 @@ public class Menu {
                                 System.out.println("Afficher tous les employés");
                                 break;
                             case 5:
-                                System.out.println("Chercher un employé par matricule");
+                                semploye.chercherEmploye();
                                 break;
                             case 6:
                                 System.out.println("Chercher un employé");
