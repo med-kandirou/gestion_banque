@@ -3,12 +3,14 @@ package Config;
 import DTO.Employe;
 import services.SClient;
 import services.SEmploye;
+import services.Smission;
 
 import java.util.Scanner;
 
 public class Menu {
     SEmploye semploye= new SEmploye();
     SClient sclient= new SClient();
+    Smission smission=new Smission();
     public void menu(){
         boolean quitter=false;
         System.out.printf("Welcome to EasyBank!");
@@ -100,7 +102,7 @@ public class Menu {
                                 sclient.chercherClientParCode();
                                 break;
                             case 6:
-                                System.out.println("Chercher un client");
+                                sclient.chercherParAtt();
                                 break;
                             case 7:
                                 System.out.println("Retour");
@@ -224,7 +226,7 @@ public class Menu {
                         int choice5 = sc5.nextInt();
                         switch (choice5) {
                             case 1:
-                                System.out.println("Ajouter une mission");
+                                smission.ajouterMission();
                                 break;
                             case 2:
                                 System.out.println("Supprimer une mission");

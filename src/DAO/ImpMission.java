@@ -14,7 +14,7 @@ public class ImpMission implements IMission {
 
     Connection cnx= Database.getconn();
     @Override
-    public Optional<Mission> jouter(Mission mission) {
+    public Optional<Mission> ajouter(Mission mission) {
         try {
             String insertSql = "insert into mission (nom, description) values (?,?);";
             // Create a PreparedStatement

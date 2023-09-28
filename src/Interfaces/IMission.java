@@ -6,7 +6,7 @@ import DTO.Operation;
 import java.util.Optional;
 
 public interface IMission {
-    Optional<Mission> jouter (Mission mission);
+    Optional<Mission> ajouter (Mission mission);
 
     Optional<Mission> supprimer (Mission mission);
 

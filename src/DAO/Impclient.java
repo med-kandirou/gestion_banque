@@ -8,6 +8,7 @@ import Interfaces.IClient;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class Impclient implements IClient {
@@ -107,17 +108,16 @@ public class Impclient implements IClient {
     }
 
     @Override
-    public Optional<Client[]> rechercheParAtt(Client client) {
+    public Optional<Client[]> rechercheParAtt(Object param) {
         List<Client> Clients= new ArrayList<>();
         try {
-            String selectSql = "SELECT * FROM client where code like ? nom like ? Or prenom like ? OR dateNaissance like ? Or telephone like ? Or adresse like ?";
+            String selectSql = "SELECT * FROM client WHERE code LIKE ? OR nom LIKE ? OR prenom LIKE ? OR telephone LIKE ? OR adresse LIKE ?";
             PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
-            preparedStatement.setString(1, client.getCode());
-            preparedStatement.setString(2, client.getNom());
-            preparedStatement.setString(3, client.getPrenom());
-            preparedStatement.setDate(4,(Date) client.getDateNaissance());
-            preparedStatement.setString(5, client.getTelephone());
-            preparedStatement.setString(6, client.getAdresse());
+            preparedStatement.setString(1,param.toString());
+            preparedStatement.setString(2, param.toString());
+            preparedStatement.setString(3,param.toString());
+            preparedStatement.setString(5, param.toString());
+            preparedStatement.setString(6,param.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 Client cl=new Client();

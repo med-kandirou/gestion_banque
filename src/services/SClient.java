@@ -55,6 +55,7 @@ public class SClient {
             System.out.println(String.format(client.getCode()+" "+client.getNom()+" "+client.getPrenom()+" "+client.getDateNaissance()+" "+client.getAdresse()));
         });
     }
+
     public void afficherListe() {
         Optional<Client[]> optionalcl = impclient.afficherListe();
         optionalcl.ifPresent(clients -> {
@@ -67,6 +68,18 @@ public class SClient {
                         cl.getDateNaissance(),
                         cl.getAdresse()
                 ));
+            }
+        });
+    }
+
+    public void chercherParAtt() {
+        client= new Client();
+        System.out.print("Entrer une information :");
+        String code=sc.nextLine();
+        Optional<Client[]> optionalcl = impclient.rechercheParAtt(code);
+        optionalcl.ifPresent(clients -> {
+            for (Client cl : clients) {
+                System.out.println(String.format(cl.getCode()+" "+cl.getNom()+" "+cl.getPrenom()+" "+cl.getDateNaissance()+" "+cl.getAdresse()));
             }
         });
     }
