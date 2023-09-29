@@ -71,17 +71,11 @@ public class SEmploye {
     public void afficherListe() {
         Optional<Employe[]> optionalEmp = impEmploye.afficherListe();
         optionalEmp.ifPresent(employes -> {
-            for (Employe emp : employes) {
-                System.out.println(String.format(
-                        "%s %s %s %s %s",
-                        emp.getMatricule(),
-                        emp.getNom(),
-                        emp.getPrenom(),
-                        emp.getDateNaissance(),
-                        emp.getDateDeRecrutement()
-                ));
+            for (Employe emp:employes) {
+                System.out.printf("Mat :"+emp.getMatricule()+" Nom :"+emp.getNom()+" Prenom :"+emp.getPrenom()+" Date Naissance :"+emp.getDateNaissance()+" Telephone :"+emp.getTelephone()+" Adresse Email :"+emp.getAdresseEmail()+" Date De Recrutement :"+emp.getDateDeRecrutement()+"\n");
             }
         });
+
     }
 
 }

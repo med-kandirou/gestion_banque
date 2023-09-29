@@ -90,8 +90,9 @@ public class ImpEmploye implements IEmploye {
             String selectSql = "SELECT * FROM employe";
             PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            while (resultSet.next()){
                 Employe emp=new Employe();
+                emp.setMatricule(resultSet.getString("matricule"));
                 emp.setNom(resultSet.getString("nom"));
                 emp.setPrenom(resultSet.getString("prenom"));
                 emp.setTelephone(resultSet.getString("telephone"));
@@ -102,7 +103,9 @@ public class ImpEmploye implements IEmploye {
             }
             resultSet.close();
             preparedStatement.close();
-            Employe[] arrayPers = employes.toArray(new Employe[0]);
+            Employe[] arrayPers = new Employe[employes.size()];
+            arrayPers=employes.toArray(arrayPers);
+
             return Optional.of(arrayPers);
         }
         catch (SQLException e){
