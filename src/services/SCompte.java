@@ -5,6 +5,10 @@ import DAO.ImpMission;
 import DTO.*;
 import Enums.Etat;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -83,6 +87,24 @@ public class SCompte {
         else{
             optComptes=impCompte.afficheParStatut("desactive");
         }
+        optComptes.ifPresent(comptes->{
+            for (Compte cl : comptes) {
+                System.out.println(String.format(cl.getCode()+" "+cl.getEtat()+" "+cl.getSolde()+" "+cl.getClient().getCode()+" "+cl.getEmploye().getMatricule()+" "+cl.getDateCreation()));
+            }
+        });
+    }
+
+
+    public void afficherPardateCreation(){
+        System.out.print("Enter a date (yyyy-MM-dd): ");
+        String input = sc.nextLine();
+        Date dt = null;
+        try {
+            dt = new SimpleDateFormat("yyyy-MM-dd").parse(input);
+        } catch (ParseException parseException) {
+            parseException.printStackTrace();
+        }
+        Optional<Compte[]> optComptes =impCompte.afficheParDate(new java.sql.Date(dt.getTime()));
         optComptes.ifPresent(comptes->{
             for (Compte cl : comptes) {
                 System.out.println(String.format(cl.getCode()+" "+cl.getEtat()+" "+cl.getSolde()+" "+cl.getClient().getCode()+" "+cl.getEmploye().getMatricule()+" "+cl.getDateCreation()));

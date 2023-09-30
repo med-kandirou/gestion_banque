@@ -156,7 +156,7 @@ public class Menu {
                                 scompte.afficherParStatut();
                                 break;
                             case 7:
-                                System.out.println("Afficher les comptes par Date de création");
+                                scompte.afficherPardateCreation();
                                 break;
                             case 8:
                                 System.out.println("Chercher un compte par client");

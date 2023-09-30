@@ -227,7 +227,7 @@ public class ImpCompte implements ICompte {
     }
 
     @Override
-    public Optional<Compte[]> afficheParDate(Date date) {
+    public Optional<Compte[]> afficheParDate(java.sql.Date date) {
         List<Compte> Comptes= new ArrayList<>();
         try {
             String selectSql = "SELECT * FROM compte WHERE datecreation = ?";
@@ -246,6 +246,7 @@ public class ImpCompte implements ICompte {
                 Employe emp= new Employe();
                 emp.setMatricule(resultSet.getString("emp_mat"));
                 compte.setEmploye(emp);
+                Comptes.add(compte);
             }
             resultSet.close();
             preparedStatement.close();

@@ -20,5 +20,5 @@ public interface ICompte {
     Optional<Compte> update(Compte compte);
 
     Optional<Compte[]> afficheParStatut(String statut);
-    Optional<Compte[]> afficheParDate(Date date);
+    Optional<Compte[]> afficheParDate(java.sql.Date date);
 }
