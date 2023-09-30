@@ -73,4 +73,21 @@ public class SCompte {
         });
     }
 
+    public void afficherParStatut(){
+        System.out.print("1-active\n2-desactive :");
+        int choix=sc.nextInt();
+        Optional<Compte[]> optComptes;
+        if(choix==1){
+            optComptes=impCompte.afficheParStatut("active");
+        }
+        else{
+            optComptes=impCompte.afficheParStatut("desactive");
+        }
+        optComptes.ifPresent(comptes->{
+            for (Compte cl : comptes) {
+                System.out.println(String.format(cl.getCode()+" "+cl.getEtat()+" "+cl.getSolde()+" "+cl.getClient().getCode()+" "+cl.getEmploye().getMatricule()+" "+cl.getDateCreation()));
+            }
+        });
+    }
+
 }

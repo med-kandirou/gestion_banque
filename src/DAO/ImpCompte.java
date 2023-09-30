@@ -200,7 +200,6 @@ public class ImpCompte implements ICompte {
             String selectSql = "SELECT * FROM compte WHERE etat like ?";
             PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
             preparedStatement.setString(1, statut);
-            preparedStatement = cnx.prepareStatement(selectSql);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 Compte compte=new Compte();
@@ -214,6 +213,7 @@ public class ImpCompte implements ICompte {
                 Employe emp= new Employe();
                 emp.setMatricule(resultSet.getString("emp_mat"));
                 compte.setEmploye(emp);
+                Comptes.add(compte);
             }
             resultSet.close();
             preparedStatement.close();

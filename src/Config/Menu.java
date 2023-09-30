@@ -153,7 +153,7 @@ public class Menu {
                                 scompte.afficherList();
                                 break;
                             case 6:
-                                System.out.println("Afficher les comptes par statut");
+                                scompte.afficherParStatut();
                                 break;
                             case 7:
                                 System.out.println("Afficher les comptes par Date de création");
