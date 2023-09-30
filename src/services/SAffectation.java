@@ -26,4 +26,19 @@ public class SAffectation {
         Optional<Affectation> optionalAff = impAffectation.ajouter(affectation);
         optionalAff.ifPresent(v -> System.out.println(String.format("*****   AJOUT D'UNE AFFECTATION  *****")));
     }
+
+    public void supprimerMission() {
+        affectation = new Affectation();
+        System.out.print("Entrer le code d'affectation:");
+        affectation.setId(sc.nextInt());
+        Optional<Integer> optionalM = impAffectation.supprimer(affectation);
+        optionalM.ifPresent(v -> {
+            if (v == 1) {
+                System.out.println(String.format("*****   AFFECTATION SUPPRIMEE  *****"));
+            }
+            else {
+                System.out.println(String.format("*****   CODE AFFECTATION INTROUVABLE  *****"));
+            }
+        });
+    }
 }
