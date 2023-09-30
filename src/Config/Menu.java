@@ -237,7 +237,7 @@ public class Menu {
                                 smission.supprimerMission();
                                 break;
                             case 3:
-                                System.out.println("Afficher toutes les missions");
+                                smission.afficherListe();
                                 break;
                             case 4:
                                 System.out.println("Ajouter nouvelle affectation");
