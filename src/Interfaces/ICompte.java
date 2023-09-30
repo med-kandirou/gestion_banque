@@ -1,16 +1,14 @@
 package Interfaces;
 
-import DTO.Client;
-import DTO.Compte;
-import DTO.Employe;
+import DTO.*;
 
 import java.sql.Date;
 import java.util.Optional;
 
 public interface ICompte {
-    Optional<Compte> ajoutercourant (Compte c);
+    Optional<Compte> ajoutercourant (CompteCourant c);
 
-    Optional<Compte> ajouterepargne (Compte c);
+    Optional<Compte> ajouterepargne (CompteEpargne c);
 
     Optional<Compte> supprimer (Compte compte);
 

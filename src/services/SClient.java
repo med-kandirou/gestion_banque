@@ -61,10 +61,11 @@ public class SClient {
         optionalcl.ifPresent(clients -> {
             for (Client cl : clients) {
                 System.out.println(String.format(
-                        "%s %s %s %s %s",
+                        "%s %s %s %s %s %s",
                         cl.getCode(),
                         cl.getNom(),
                         cl.getPrenom(),
+                        cl.getTelephone(),
                         cl.getDateNaissance(),
                         cl.getAdresse()
                 ));

@@ -98,7 +98,7 @@ public class Menu {
                                 sclient.supprierClient();
                                 break;
                             case 4:
-                                System.out.println("Afficher tous les clients");
+                                sclient.afficherListe();
                                 break;
                             case 5:
                                 sclient.chercherClientParCode();
@@ -138,7 +138,10 @@ public class Menu {
                         int choice3 = sc3.nextInt();
                         switch (choice3) {
                             case 1:
-                                System.out.println("Ajouter un compte");
+                                System.out.println("1-Courant\n2-Epargne");
+                                System.out.println("choix");
+                                int choix = sc.nextInt();
+                                scompte.ajouterCompte(choix);
                                 break;
                             case 2:
                                 System.out.println("Modifier un compte");
