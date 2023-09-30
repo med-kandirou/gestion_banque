@@ -57,7 +57,7 @@ public class Menu {
                                 semploye.chercherEmploye();
                                 break;
                             case 6:
-                                System.out.println("Chercher un employé");
+                                semploye.chercherParAtt();
                                 break;
                             case 7:
                                 System.out.println("Retour");
@@ -131,7 +131,6 @@ public class Menu {
                         System.out.println("9. Chercher un compte par numéro d'opération");
                         System.out.println("10. Retour");
                         System.out.println("Votre choix: ");
-                        //get the user input
                         Scanner sc3 = new Scanner(System.in);
                         int choice3 = sc3.nextInt();
                         switch (choice3) {
@@ -151,7 +150,7 @@ public class Menu {
                                 scompte.supprierCompte();
                                 break;
                             case 5:
-                                System.out.println("Afficher tous les comptes");
+                                scompte.afficherList();
                                 break;
                             case 6:
                                 System.out.println("Afficher les comptes par statut");

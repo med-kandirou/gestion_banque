@@ -9,6 +9,7 @@ import Interfaces.IEmploye;
 import java.sql.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -117,7 +118,7 @@ public class ImpEmploye implements IEmploye {
     public Optional<Employe[]> rechercheParAtt(String param) {
         List<Employe> employes= new ArrayList<>();
         try {
-            String selectSql = "SELECT * FROM employe where matricule like ? nom like ? Or prenom like ? OR dateNaissance like ? Or telephone like ? Or dateDeRecrutement like ? Or adresseEmail like ?";
+            String selectSql = "SELECT * FROM employe WHERE matricule LIKE ? OR nom LIKE ? OR prenom LIKE ? OR dateNaissance = CAST(? AS DATE) OR telephone LIKE ? OR dateDeRecrutement = CAST(? AS DATE) OR adresseEmail LIKE ?;";
             PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
             preparedStatement.setString(1, param);
             preparedStatement.setString(2, param);

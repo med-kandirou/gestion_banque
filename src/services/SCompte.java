@@ -64,4 +64,13 @@ public class SCompte {
         optionalEmp.ifPresent(v -> System.out.println(String.format("*****  COMPTE SUPPRIME  *****")));
     }
 
+    public void afficherList(){
+        Optional<Compte[]> optComptes=impCompte.afficherList();
+        optComptes.ifPresent(comptes->{
+            for (Compte cl : comptes) {
+                System.out.println(String.format(cl.getCode()+" "+cl.getEtat()+" "+cl.getSolde()+" "+cl.getClient().getCode()+" "+cl.getEmploye().getMatricule()+" "+cl.getDateCreation()));
+            }
+        });
+    }
+
 }

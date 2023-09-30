@@ -160,6 +160,7 @@ public class ImpCompte implements ICompte {
                 Employe emp= new Employe();
                 emp.setMatricule(resultSet.getString("emp_mat"));
                 compte.setEmploye(emp);
+                Comptes.add(compte);
             }
             resultSet.close();
             preparedStatement.close();

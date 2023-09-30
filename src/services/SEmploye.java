@@ -1,6 +1,7 @@
 package services;
 
 import DAO.ImpEmploye;
+import DTO.Client;
 import DTO.Employe;
 import DTO.Personne;
 
@@ -85,6 +86,18 @@ public class SEmploye {
             }
         });
 
+    }
+
+    public void chercherParAtt() {
+        emp= new Employe();
+        System.out.print("Entrer une information :");
+        String info=sc.nextLine();
+        Optional<Employe[]> optionalemp = impEmploye.rechercheParAtt(info);
+        optionalemp.ifPresent(employes -> {
+            for (Employe emp : employes) {
+                System.out.println(String.format(emp.getMatricule()+" "+emp.getNom()+" "+emp.getPrenom()+" "+emp.getTelephone()+" "+emp.getDateNaissance()+" "+emp.getAdresseEmail()+" "+emp.getDateDeRecrutement()));
+            }
+        });
     }
 
 }
