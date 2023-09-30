@@ -12,12 +12,11 @@ public class ImpAffectation implements IAffectation {
     @Override
     public Optional<Affectation> ajouter(Affectation affectation) {
         try {
-            String insertSql = "insert into affectation (emp_mat,codemission, datechangement) values (?,?,?);";
+            String insertSql = "insert into affectation (emp_mat,codemission) values (?,?);";
             // Create a PreparedStatement
             PreparedStatement preparedStatement = cnx.prepareStatement(insertSql);
             preparedStatement.setString(1, affectation.getEmploye().getMatricule());
             preparedStatement.setInt(2, affectation.getMission().getCode());
-            preparedStatement.setDate(3,(Date) affectation.getDateChangement());
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 return Optional.ofNullable(affectation);

@@ -1,10 +1,7 @@
 package Config;
 
 import DTO.Employe;
-import services.SClient;
-import services.SCompte;
-import services.SEmploye;
-import services.Smission;
+import services.*;
 
 import java.util.Scanner;
 
@@ -13,6 +10,7 @@ public class Menu {
     SClient sclient= new SClient();
     Smission smission=new Smission();
     SCompte scompte=new SCompte();
+    SAffectation saffectation=new SAffectation();
     public void menu(){
         boolean quitter=false;
         System.out.printf("Welcome to EasyBank!");
@@ -240,7 +238,7 @@ public class Menu {
                                 smission.afficherListe();
                                 break;
                             case 4:
-                                System.out.println("Ajouter nouvelle affectation");
+                                saffectation.ajouterMission();
                                 break;
                             case 5:
                                 System.out.println("Supprimer une affectation");
