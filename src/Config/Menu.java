@@ -197,7 +197,7 @@ public class Menu {
                                 soperation.supprierEmploye();
                                 break;
                             case 3:
-                                System.out.println("Chercher une opération par numéro");
+                                soperation.chercherbyNum();
                                 break;
                             case 4:
                                 System.out.println("Retour");

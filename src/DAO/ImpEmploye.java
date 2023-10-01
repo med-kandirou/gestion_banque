@@ -116,39 +116,40 @@ public class ImpEmploye implements IEmploye {
 
     @Override
     public Optional<Employe[]> rechercheParAtt(String param) {
-        List<Employe> employes= new ArrayList<>();
+        List<Employe> employes = new ArrayList<>();
         try {
-            String selectSql = "SELECT * FROM employe WHERE matricule LIKE ? OR nom LIKE ? OR prenom LIKE ? OR dateNaissance = CAST(? AS DATE) OR telephone LIKE ? OR dateDeRecrutement = CAST(? AS DATE) OR adresseEmail LIKE ?;";
+            String selectSql = "SELECT * FROM employe WHERE matricule LIKE ? OR nom LIKE ? OR prenom LIKE ? OR dateNaissance LIKE ? OR telephone LIKE ? OR dateDeRecrutement LIKE ? OR adresseEmail LIKE ?";
             PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
-            preparedStatement.setString(1, param);
-            preparedStatement.setString(2, param);
-            preparedStatement.setString(3, param);
-            preparedStatement.setString(4,param);
-            preparedStatement.setString(5, param);
-            preparedStatement.setString(6,param);
-            preparedStatement.setString(7,param);
+            String wildcardParam = "%" + param + "%";
+            preparedStatement.setString(1, wildcardParam);
+            preparedStatement.setString(2, wildcardParam);
+            preparedStatement.setString(3, wildcardParam);
+            preparedStatement.setString(4, wildcardParam);
+            preparedStatement.setString(5, wildcardParam);
+            preparedStatement.setString(6, wildcardParam);
+            preparedStatement.setString(7, wildcardParam);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
-                Employe emp=new Employe();
+            while (resultSet.next()) {
+                Employe emp = new Employe();
                 emp.setMatricule(resultSet.getString("matricule"));
                 emp.setNom(resultSet.getString("nom"));
                 emp.setPrenom(resultSet.getString("prenom"));
                 emp.setTelephone(resultSet.getString("telephone"));
-                emp.setDateNaissance(resultSet.getDate("datenaissance"));
-                emp.setDateNaissance(resultSet.getDate("datederecrutement"));
-                emp.setAdresseEmail(resultSet.getString("adresseemail"));
+                emp.setDateNaissance(resultSet.getDate("dateNaissance")); // Utilisation de getString pour la date
+                emp.setDateDeRecrutement(resultSet.getDate("dateDeRecrutement")); // Utilisation de getString pour la date
+                emp.setAdresseEmail(resultSet.getString("adresseEmail"));
                 employes.add(emp);
             }
             resultSet.close();
             preparedStatement.close();
             Employe[] arrayemp = employes.toArray(new Employe[0]);
             return Optional.of(arrayemp);
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             System.out.print(e.getMessage());
         }
         return Optional.empty();
     }
+
 
     @Override
     public Optional<Employe> update(Employe employe) {
