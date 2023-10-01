@@ -244,7 +244,7 @@ public class Menu {
                                 saffectation.supprimerMission();
                                 break;
                             case 6:
-                                System.out.println("Afficher l'historique des affectations d'une employé");
+                                saffectation.Historique();
                                 break;
                             case 7:
                                 System.out.println("Statistiques des affectations");

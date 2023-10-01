@@ -41,4 +41,22 @@ public class SAffectation {
             }
         });
     }
+
+    public void Historique(){
+        System.out.print("Entrer le matricule d'employe :");
+        String mat=sc.nextLine();
+        Optional<Affectation[]> optAffec= impAffectation.Historique(mat);
+        optAffec.ifPresent(affectations -> {
+            for (Affectation aff:affectations){
+                System.out.println(String.format(
+                        "%s %s %s",
+                        aff.getMission().getNom(),
+                        aff.getMission().getDescription(),
+                        aff.getDateChangement()
+                ));
+            }
+
+        });
+
+    }
 }
