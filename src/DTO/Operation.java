@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Date;
 
 public class Operation {
-    private String numero;
+    private int numero;
     private Date dateOperation;
     private Double montant;
     private Type type;
@@ -43,18 +43,19 @@ public class Operation {
     public Operation() {
     }
 
-    // Méthodes d'accès (getters)
-    public String getNumero() {
+
+    public int getNumero() {
         return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
     public Date getDateOperation() {
         return dateOperation;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
 
     public void setDateOperation(Date dateOperation) {
         this.dateOperation = dateOperation;

@@ -194,7 +194,7 @@ public class Menu {
                                 soperation.ajouterOperation();
                                 break;
                             case 2:
-                                System.out.println("Supprimer une opération");
+                                soperation.supprierEmploye();
                                 break;
                             case 3:
                                 System.out.println("Chercher une opération par numéro");

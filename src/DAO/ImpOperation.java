@@ -42,7 +42,7 @@ public class ImpOperation implements IOperation {
         try {
             String deleteSql = "DELETE FROM operation WHERE numero = ?";
             PreparedStatement preparedStatement = cnx.prepareStatement(deleteSql);
-            preparedStatement.setString(1, operation.getNumero());
+            preparedStatement.setInt(1, operation.getNumero());
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 return Optional.ofNullable(operation);

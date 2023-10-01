@@ -38,4 +38,12 @@ public class SOperation {
             System.out.println(String.format("*****   AJOUT D'UNE OPERATION  *****"));
         });
     }
+
+    public void supprierEmploye() {
+        operation= new Operation();
+        System.out.print("Entrer le code d'operation :");
+        operation.setNumero(sc.nextInt());
+        Optional<Operation> optionalOp= impOperation.supprimer(operation);
+        optionalOp.ifPresent(v -> System.out.println(String.format("*****  OPERATION SUPPRIME  *****")));
+    }
 }
