@@ -17,15 +17,14 @@ public class ImpOperation implements IOperation {
     Connection cnx= Database.getconn();
     @Override
     public Optional<Operation> ajouter(Operation operation) {
+        System.out.print(operation.getType());
         try {
-            String insertSql = "insert into operation (dateoperation, montant, type, compte_id, emp_mat) values (?,?,?,?,?);";
-            // Create a PreparedStatement
+            String insertSql = "insert into operation (montant, type, compte_id, emp_mat) values (?,?,?,?);";
             PreparedStatement preparedStatement = cnx.prepareStatement(insertSql);
-            preparedStatement.setDate(1,(Date) operation.getDateOperation());
-            preparedStatement.setDouble(2, operation.getMontant());
-            preparedStatement.setString(3,operation.getType().toString());
-            preparedStatement.setString(4,operation.getCompte().getCode());
-            preparedStatement.setString(5,operation.getEmploye().getMatricule());
+            preparedStatement.setDouble(1, operation.getMontant());
+            preparedStatement.setString(2,operation.getType().toString());
+            preparedStatement.setString(3,operation.getCompte().getCode());
+            preparedStatement.setString(4,operation.getEmploye().getMatricule());
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 return Optional.ofNullable(operation);

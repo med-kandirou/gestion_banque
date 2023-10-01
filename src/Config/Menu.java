@@ -11,6 +11,7 @@ public class Menu {
     Smission smission=new Smission();
     SCompte scompte=new SCompte();
     SAffectation saffectation=new SAffectation();
+    SOperation soperation=new SOperation();
     public void menu(){
         boolean quitter=false;
         System.out.printf("Welcome to EasyBank!");
@@ -190,7 +191,7 @@ public class Menu {
                         int choice4 = sc4.nextInt();
                         switch (choice4) {
                             case 1:
-                                System.out.println("Ajouter une opération");
+                                soperation.ajouterOperation();
                                 break;
                             case 2:
                                 System.out.println("Supprimer une opération");
