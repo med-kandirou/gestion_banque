@@ -72,4 +72,23 @@ public class ImpAffectation implements IAffectation {
         return Optional.empty();
     }
 
+    @Override
+    public Optional<Integer> NbrMissEmp(String mat) {
+        try {
+            String sql = "SELECT count(*) AS count FROM affectation WHERE emp_mat = ?";
+            PreparedStatement statement = cnx.prepareStatement(sql);
+            statement.setString(1, mat);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt("count");
+                return Optional.of(count);
+            } else {
+                return Optional.of(0);
+            }
+        } catch (SQLException e) {
+            System.out.print(e.getMessage());
+        }
+        return Optional.empty();
+    }
+
 }

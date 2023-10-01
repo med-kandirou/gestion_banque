@@ -247,7 +247,7 @@ public class Menu {
                                 saffectation.Historique();
                                 break;
                             case 7:
-                                System.out.println("Statistiques des affectations");
+                                saffectation.statistique();
                                 break;
                             case 8:
                                 System.out.println("Retour");

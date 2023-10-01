@@ -59,4 +59,14 @@ public class SAffectation {
         });
 
     }
+
+    public void statistique(){
+        System.out.print("Entrer le matricule d'employe :");
+        String mat=sc.nextLine();
+        Optional<Integer> optAffec= impAffectation.NbrMissEmp(mat);
+        optAffec.ifPresent(vl -> {
+            System.out.printf("Le total des missions passé par ce employe est :"+vl);
+        });
+
+    }
 }
