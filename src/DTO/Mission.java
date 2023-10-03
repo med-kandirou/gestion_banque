@@ -1,7 +1,7 @@
 package DTO;
 
 public class Mission {
-    private String code;
+    private int code;
     private String nom;
     private String description;
 
@@ -9,11 +9,11 @@ public class Mission {
     public Mission() {}
 
     // Getters et setters pour les attributs
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 

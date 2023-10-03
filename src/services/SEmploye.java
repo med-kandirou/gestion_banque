@@ -8,15 +8,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
 public class SEmploye {
 
     ImpEmploye impEmploye= new ImpEmploye();
+    Employe emp;
+    Scanner sc = new Scanner(System.in);
     public void ajouterEmploye() {
-        Scanner sc = new Scanner(System.in);
-        Employe emp = new Employe();
+        emp = new Employe();
         System.out.print("matricule :");
         emp.setMatricule(sc.nextLine());
         System.out.print("nom :");
@@ -45,8 +47,34 @@ public class SEmploye {
             parseException.printStackTrace();
         }
         emp.setDateDeRecrutement(new java.sql.Date(dateRecru.getTime()));
-        Optional<Personne> optionalEmp = impEmploye.ajouter(emp);
+        Optional<Employe> optionalEmp = impEmploye.ajouter(emp);
         optionalEmp.ifPresent(v -> System.out.println(String.format("*****   AJOUT D'UN EMPLOI  *****")));
+    }
+
+    public void supprierEmploye() {
+        emp= new Employe();
+        System.out.print("Entrer matricule :");
+        emp.setMatricule(sc.nextLine());
+        Optional<Employe> optionalEmp = impEmploye.supprimer(emp);
+        optionalEmp.ifPresent(v -> System.out.println(String.format("*****  EMPLOI SUPPRIME  *****")));
+    }
+    public void chercherEmploye() {
+        emp= new Employe();
+        System.out.print("Entrer matricule :");
+        String matricule=sc.nextLine();
+        Optional<Employe> optionalEmp = impEmploye.chercherbyCode(matricule);
+        Optional<Employe> optionalEmploye = optionalEmp.map(emp -> (Employe) emp);
+        optionalEmploye.ifPresent(employe -> {
+            System.out.println(String.format(employe.getMatricule()+" "+employe.getNom()+" "+employe.getPrenom()+" "+employe.getDateNaissance()+" "+employe.getDateDeRecrutement()));
+        });
+    }
+    public void afficherListe() {
+        Optional<Employe[]> optionalEmp = impEmploye.afficherListe();
+        optionalEmp.ifPresent(employes -> {
+            for (Employe emp:employes) {
+                System.out.printf("Mat :"+emp.getMatricule()+" Nom :"+emp.getNom()+" Prenom :"+emp.getPrenom()+" Date Naissance :"+emp.getDateNaissance()+" Telephone :"+emp.getTelephone()+" Adresse Email :"+emp.getAdresseEmail()+" Date De Recrutement :"+emp.getDateDeRecrutement()+"\n");
+            }
+        });
 
     }
 

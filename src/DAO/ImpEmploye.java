@@ -4,35 +4,33 @@ import Config.Database;
 import DTO.Client;
 import DTO.Employe;
 import DTO.Personne;
-import Interfaces.IPersonne;
+import Interfaces.IEmploye;
 
 import java.sql.*;
-import java.util.Date;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
-public class ImpEmploye implements IPersonne {
+public class ImpEmploye implements IEmploye {
     Connection cnx= Database.getconn();
     @Override
-    public Optional<Personne> ajouter(Personne personne) {
-        Employe emp=(Employe) personne;
+    public Optional<Employe> ajouter(Employe employe) {
         try {
             String insertSql = "INSERT INTO employe (matricule,nom, prenom, dateNaissance, telephone,dateDeRecrutement,adresseEmail) VALUES (?, ?, ?, ?,?,?,?)";
             // Create a PreparedStatement
             PreparedStatement preparedStatement = cnx.prepareStatement(insertSql);
-            preparedStatement.setString(1, emp.getMatricule());
-            preparedStatement.setString(2, emp.getNom());
-            preparedStatement.setString(3,emp.getPrenom());
-            preparedStatement.setDate(4, emp.getDateNaissance());
-            preparedStatement.setString(5,emp.getTelephone());
-            preparedStatement.setDate(6,emp.getDateDeRecrutement());
-            preparedStatement.setString(7,emp.getAdresseEmail());
+            preparedStatement.setString(1, employe.getMatricule());
+            preparedStatement.setString(2, employe.getNom());
+            preparedStatement.setString(3,employe.getPrenom());
+            preparedStatement.setDate(4, employe.getDateNaissance());
+            preparedStatement.setString(5,employe.getTelephone());
+            preparedStatement.setDate(6,employe.getDateDeRecrutement());
+            preparedStatement.setString(7,employe.getAdresseEmail());
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
-                return Optional.ofNullable(emp);
+                return Optional.ofNullable(employe);
             }
             preparedStatement.close();
         }
@@ -42,15 +40,14 @@ public class ImpEmploye implements IPersonne {
         return Optional.empty();
     }
 
-    public Optional<Personne> supprimer(Personne personne) {
-        Employe emp=(Employe) personne;
+    public Optional<Employe> supprimer(Employe employe) {
         try {
             String deleteSql = "DELETE FROM employe WHERE matricule = ?";
             PreparedStatement preparedStatement = cnx.prepareStatement(deleteSql);
-            preparedStatement.setString(1, emp.getMatricule());
+            preparedStatement.setString(1, employe.getMatricule());
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
-                return Optional.ofNullable(emp);
+                return Optional.ofNullable(employe);
             }
             preparedStatement.close();
         }
@@ -61,7 +58,7 @@ public class ImpEmploye implements IPersonne {
     }
 
     @Override
-    public Optional<Personne> chercherbyCode(String code) {
+    public Optional<Employe> chercherbyCode(String code) {
         Employe emp=new Employe();
         try {
             String selectSql = "SELECT * FROM employe WHERE matricule like '"+code+"'";
@@ -71,9 +68,9 @@ public class ImpEmploye implements IPersonne {
                 emp.setMatricule(resultSet.getString("matricule"));
                 emp.setNom(resultSet.getString("nom"));
                 emp.setPrenom(resultSet.getString("prenom"));
-                emp.setPrenom(resultSet.getString("datenaissance"));
                 emp.setTelephone(resultSet.getString("telephone"));
-                emp.setDateNaissance(resultSet.getDate("datederecrutement"));
+                emp.setDateNaissance(resultSet.getDate("datenaissance"));
+                emp.setDateDeRecrutement(resultSet.getDate("datederecrutement"));
                 emp.setAdresseEmail(resultSet.getString("adresseemail"));
             }
             resultSet.close();
@@ -87,14 +84,15 @@ public class ImpEmploye implements IPersonne {
     }
 
     @Override
-    public Optional<Personne[]> afficherListe() {
+    public Optional<Employe[]> afficherListe() {
         List<Employe> employes= new ArrayList<>();
         try {
             String selectSql = "SELECT * FROM employe";
             PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            while (resultSet.next()){
                 Employe emp=new Employe();
+                emp.setMatricule(resultSet.getString("matricule"));
                 emp.setNom(resultSet.getString("nom"));
                 emp.setPrenom(resultSet.getString("prenom"));
                 emp.setTelephone(resultSet.getString("telephone"));
@@ -105,7 +103,9 @@ public class ImpEmploye implements IPersonne {
             }
             resultSet.close();
             preparedStatement.close();
-            Personne[] arrayPers = employes.toArray(new Employe[0]);
+            Employe[] arrayPers = new Employe[employes.size()];
+            arrayPers=employes.toArray(arrayPers);
+
             return Optional.of(arrayPers);
         }
         catch (SQLException e){
@@ -115,34 +115,33 @@ public class ImpEmploye implements IPersonne {
     }
 
     @Override
-    public Optional<Personne[]> rechercheParAtt(Personne personne) {
-        Employe emp=(Employe) personne;
+    public Optional<Employe[]> rechercheParAtt(Employe employe) {
         List<Employe> employes= new ArrayList<>();
         try {
             String selectSql = "SELECT * FROM employe where matricule like ? nom like ? Or prenom like ? OR dateNaissance like ? Or telephone like ? Or dateDeRecrutement like ? Or adresseEmail like ?";
             PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
-            preparedStatement.setString(1, emp.getMatricule());
-            preparedStatement.setString(2, emp.getNom());
-            preparedStatement.setString(3, emp.getPrenom());
-            preparedStatement.setDate(4,emp.getDateNaissance());
-            preparedStatement.setString(5, emp.getTelephone());
-            preparedStatement.setDate(6,emp.getDateDeRecrutement());
-            preparedStatement.setString(7,emp.getAdresseEmail());
+            preparedStatement.setString(1, employe.getMatricule());
+            preparedStatement.setString(2, employe.getNom());
+            preparedStatement.setString(3, employe.getPrenom());
+            preparedStatement.setDate(4,employe.getDateNaissance());
+            preparedStatement.setString(5, employe.getTelephone());
+            preparedStatement.setDate(6,employe.getDateDeRecrutement());
+            preparedStatement.setString(7,employe.getAdresseEmail());
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                Employe employe=new Employe();
-                employe.setMatricule(resultSet.getString("matricule"));
-                employe.setNom(resultSet.getString("nom"));
-                employe.setPrenom(resultSet.getString("prenom"));
-                employe.setTelephone(resultSet.getString("telephone"));
-                employe.setDateNaissance(resultSet.getDate("datenaissance"));
-                employe.setDateNaissance(resultSet.getDate("datederecrutement"));
-                employe.setAdresseEmail(resultSet.getString("adresseemail"));
-                employes.add(employe);
+                Employe emp=new Employe();
+                emp.setMatricule(resultSet.getString("matricule"));
+                emp.setNom(resultSet.getString("nom"));
+                emp.setPrenom(resultSet.getString("prenom"));
+                emp.setTelephone(resultSet.getString("telephone"));
+                emp.setDateNaissance(resultSet.getDate("datenaissance"));
+                emp.setDateNaissance(resultSet.getDate("datederecrutement"));
+                emp.setAdresseEmail(resultSet.getString("adresseemail"));
+                employes.add(emp);
             }
             resultSet.close();
             preparedStatement.close();
-            Personne[] arrayemp = employes.toArray(new Client[0]);
+            Employe[] arrayemp = employes.toArray(new Employe[0]);
             return Optional.of(arrayemp);
         }
         catch (SQLException e){
@@ -152,21 +151,20 @@ public class ImpEmploye implements IPersonne {
     }
 
     @Override
-    public Optional<Personne> update(Personne personne) {
-        Employe emp=(Employe) personne;
+    public Optional<Employe> update(Employe employe) {
         try {
             String updatequery = "UPDATE employe SET nom = ?, prenom = ?,datenaissance = ? ,telephone = ?,datederecrutement = ?, adresseemail = ? WHERE matricule like ?;";
             PreparedStatement preparedStatement = cnx.prepareStatement(updatequery);
-            preparedStatement.setString(1, emp.getNom());
-            preparedStatement.setString(2, emp.getPrenom());
-            preparedStatement.setDate(3, emp.getDateNaissance());
-            preparedStatement.setString(4, emp.getTelephone());
-            preparedStatement.setDate(5, emp.getDateDeRecrutement());
-            preparedStatement.setString(6,emp.getAdresseEmail());
-            preparedStatement.setString(7,emp.getMatricule());
+            preparedStatement.setString(1, employe.getNom());
+            preparedStatement.setString(2, employe.getPrenom());
+            preparedStatement.setDate(3, employe.getDateNaissance());
+            preparedStatement.setString(4, employe.getTelephone());
+            preparedStatement.setDate(5, employe.getDateDeRecrutement());
+            preparedStatement.setString(6,employe.getAdresseEmail());
+            preparedStatement.setString(7,employe.getMatricule());
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
-                return Optional.ofNullable(emp);
+                return Optional.ofNullable(employe);
             }
             preparedStatement.close();
         }

@@ -1,12 +1,18 @@
 package Config;
 
 import DTO.Employe;
+import services.SClient;
+import services.SCompte;
 import services.SEmploye;
+import services.Smission;
 
 import java.util.Scanner;
 
 public class Menu {
     SEmploye semploye= new SEmploye();
+    SClient sclient= new SClient();
+    Smission smission=new Smission();
+    SCompte scompte=new SCompte();
     public void menu(){
         boolean quitter=false;
         System.out.printf("Welcome to EasyBank!");
@@ -44,13 +50,13 @@ public class Menu {
                                 System.out.println("Modifier un employé");
                                 break;
                             case 3:
-                                System.out.println("Supprimer un employé");
+                                semploye.supprierEmploye();
                                 break;
                             case 4:
-                                System.out.println("Afficher tous les employés");
+                                semploye.afficherListe();
                                 break;
                             case 5:
-                                System.out.println("Chercher un employé par matricule");
+                                semploye.chercherEmploye();
                                 break;
                             case 6:
                                 System.out.println("Chercher un employé");
@@ -83,22 +89,22 @@ public class Menu {
                         int choice2 = sc2.nextInt();
                         switch (choice2) {
                             case 1:
-                                System.out.println("Ajouter un client");
+                                sclient.ajouterClient();
                                 break;
                             case 2:
                                 System.out.println("Modifier un client");
                                 break;
                             case 3:
-                                System.out.println("Supprimer un client");
+                                sclient.supprierClient();
                                 break;
                             case 4:
                                 System.out.println("Afficher tous les clients");
                                 break;
                             case 5:
-                                System.out.println("Chercher un client par code");
+                                sclient.chercherClientParCode();
                                 break;
                             case 6:
-                                System.out.println("Chercher un client");
+                                sclient.chercherParAtt();
                                 break;
                             case 7:
                                 System.out.println("Retour");
@@ -141,7 +147,7 @@ public class Menu {
                                 System.out.println("Changement de statut");
                                 break;
                             case 4:
-                                System.out.println("Supprimer un compte");
+                                scompte.supprierCompte();
                                 break;
                             case 5:
                                 System.out.println("Afficher tous les comptes");
@@ -222,10 +228,10 @@ public class Menu {
                         int choice5 = sc5.nextInt();
                         switch (choice5) {
                             case 1:
-                                System.out.println("Ajouter une mission");
+                                smission.ajouterMission();
                                 break;
                             case 2:
-                                System.out.println("Supprimer une mission");
+                                smission.supprimerMission();
                                 break;
                             case 3:
                                 System.out.println("Afficher toutes les missions");
