@@ -46,4 +46,14 @@ public class SOperation {
         Optional<Operation> optionalOp= impOperation.supprimer(operation);
         optionalOp.ifPresent(v -> System.out.println(String.format("*****  OPERATION SUPPRIME  *****")));
     }
+
+    public void chercherbyNum(){
+        operation= new Operation();
+        System.out.print("Entrer le code d'operation :");
+        operation.setNumero(sc.nextInt());
+        Optional<Operation> optionalOp= impOperation.chercherbyNum(operation);
+        optionalOp.ifPresent(op -> {
+            System.out.println(op.getNumero() + " " + op.getCompte().getCode() + " " + op.getEmploye().getMatricule() + " " + op.getType() + " " + op.getDateOperation() + " " + op.getMontant());
+        });
+    }
 }

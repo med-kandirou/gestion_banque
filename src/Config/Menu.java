@@ -197,7 +197,7 @@ public class Menu {
                                 soperation.supprierEmploye();
                                 break;
                             case 3:
-                                System.out.println("Chercher une opération par numéro");
+                                soperation.chercherbyNum();
                                 break;
                             case 4:
                                 System.out.println("Retour");
@@ -244,10 +244,10 @@ public class Menu {
                                 saffectation.supprimerMission();
                                 break;
                             case 6:
-                                System.out.println("Afficher l'historique des affectations d'une employé");
+                                saffectation.Historique();
                                 break;
                             case 7:
-                                System.out.println("Statistiques des affectations");
+                                saffectation.statistique();
                                 break;
                             case 8:
                                 System.out.println("Retour");

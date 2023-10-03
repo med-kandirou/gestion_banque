@@ -49,19 +49,16 @@ public class ImpAffectation implements IAffectation {
     public Optional<Affectation[]> Historique(String emp_mat) {
         ArrayList<Affectation> affectations= new ArrayList<>();
         try {
-            String sql = "SELECT * FROM affectation WHERE emp_mat = ? ";
+            String sql = "select m.nom,m.description,a.datechangement from affectation a inner join mission m on m.code = a.codemission where emp_mat=?;";
             PreparedStatement statement = cnx.prepareStatement(sql);
             statement.setString(1, emp_mat);
             ResultSet resultSet=statement.executeQuery();
             while (resultSet.next()){
                 Affectation affectation= new Affectation();
-                affectation.setId(resultSet.getInt("id"));
                 affectation.setDateChangement(resultSet.getDate("datechangement"));
-                Employe emp= new Employe();
-                emp.setMatricule(resultSet.getString("emp_mat"));
-                affectation.setEmploye(emp);
                 Mission mission= new Mission();
-                mission.setCode(resultSet.getInt("codemission"));
+                mission.setNom(resultSet.getString("nom"));
+                mission.setDescription(resultSet.getString("description"));
                 affectation.setMission(mission);
                 affectations.add(affectation);
             }
@@ -70,6 +67,25 @@ public class ImpAffectation implements IAffectation {
             Affectation[] arrayAffec= affectations.toArray(new Affectation[0]);
             return Optional.ofNullable(arrayAffec);
         } catch (SQLException e){
+            System.out.print(e.getMessage());
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Integer> NbrMissEmp(String mat) {
+        try {
+            String sql = "SELECT count(*) AS count FROM affectation WHERE emp_mat = ?";
+            PreparedStatement statement = cnx.prepareStatement(sql);
+            statement.setString(1, mat);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt("count");
+                return Optional.of(count);
+            } else {
+                return Optional.of(0);
+            }
+        } catch (SQLException e) {
             System.out.print(e.getMessage());
         }
         return Optional.empty();

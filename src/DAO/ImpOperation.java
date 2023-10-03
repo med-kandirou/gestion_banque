@@ -58,7 +58,7 @@ public class ImpOperation implements IOperation {
     @Override
     public Optional<Operation> chercherbyNum(Operation operation) {
         try {
-            String selectSql = "SELECT * FROM operation WHERE numero like '"+operation.getNumero()+"'";
+            String selectSql = "SELECT * FROM operation WHERE numero = '"+operation.getNumero()+"'";
             PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
