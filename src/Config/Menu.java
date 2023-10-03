@@ -1,10 +1,7 @@
 package Config;
 
 import DTO.Employe;
-import services.SClient;
-import services.SCompte;
-import services.SEmploye;
-import services.Smission;
+import services.*;
 
 import java.util.Scanner;
 
@@ -13,6 +10,8 @@ public class Menu {
     SClient sclient= new SClient();
     Smission smission=new Smission();
     SCompte scompte=new SCompte();
+    SAffectation saffectation=new SAffectation();
+    SOperation soperation=new SOperation();
     public void menu(){
         boolean quitter=false;
         System.out.printf("Welcome to EasyBank!");
@@ -59,7 +58,7 @@ public class Menu {
                                 semploye.chercherEmploye();
                                 break;
                             case 6:
-                                System.out.println("Chercher un employé");
+                                semploye.chercherParAtt();
                                 break;
                             case 7:
                                 System.out.println("Retour");
@@ -98,7 +97,7 @@ public class Menu {
                                 sclient.supprierClient();
                                 break;
                             case 4:
-                                System.out.println("Afficher tous les clients");
+                                sclient.afficherListe();
                                 break;
                             case 5:
                                 sclient.chercherClientParCode();
@@ -133,12 +132,14 @@ public class Menu {
                         System.out.println("9. Chercher un compte par numéro d'opération");
                         System.out.println("10. Retour");
                         System.out.println("Votre choix: ");
-                        //get the user input
                         Scanner sc3 = new Scanner(System.in);
                         int choice3 = sc3.nextInt();
                         switch (choice3) {
                             case 1:
-                                System.out.println("Ajouter un compte");
+                                System.out.println("1-Courant\n2-Epargne");
+                                System.out.println("choix");
+                                int choix = sc.nextInt();
+                                scompte.ajouterCompte(choix);
                                 break;
                             case 2:
                                 System.out.println("Modifier un compte");
@@ -150,13 +151,13 @@ public class Menu {
                                 scompte.supprierCompte();
                                 break;
                             case 5:
-                                System.out.println("Afficher tous les comptes");
+                                scompte.afficherList();
                                 break;
                             case 6:
-                                System.out.println("Afficher les comptes par statut");
+                                scompte.afficherParStatut();
                                 break;
                             case 7:
-                                System.out.println("Afficher les comptes par Date de création");
+                                scompte.afficherPardateCreation();
                                 break;
                             case 8:
                                 System.out.println("Chercher un compte par client");
@@ -190,10 +191,10 @@ public class Menu {
                         int choice4 = sc4.nextInt();
                         switch (choice4) {
                             case 1:
-                                System.out.println("Ajouter une opération");
+                                soperation.ajouterOperation();
                                 break;
                             case 2:
-                                System.out.println("Supprimer une opération");
+                                soperation.supprierEmploye();
                                 break;
                             case 3:
                                 System.out.println("Chercher une opération par numéro");
@@ -234,13 +235,13 @@ public class Menu {
                                 smission.supprimerMission();
                                 break;
                             case 3:
-                                System.out.println("Afficher toutes les missions");
+                                smission.afficherListe();
                                 break;
                             case 4:
-                                System.out.println("Ajouter nouvelle affectation");
+                                saffectation.ajouterMission();
                                 break;
                             case 5:
-                                System.out.println("Supprimer une affectation");
+                                saffectation.supprimerMission();
                                 break;
                             case 6:
                                 System.out.println("Afficher l'historique des affectations d'une employé");

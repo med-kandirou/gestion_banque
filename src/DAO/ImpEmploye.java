@@ -9,6 +9,7 @@ import Interfaces.IEmploye;
 import java.sql.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -105,7 +106,6 @@ public class ImpEmploye implements IEmploye {
             preparedStatement.close();
             Employe[] arrayPers = new Employe[employes.size()];
             arrayPers=employes.toArray(arrayPers);
-
             return Optional.of(arrayPers);
         }
         catch (SQLException e){
@@ -115,18 +115,18 @@ public class ImpEmploye implements IEmploye {
     }
 
     @Override
-    public Optional<Employe[]> rechercheParAtt(Employe employe) {
+    public Optional<Employe[]> rechercheParAtt(String param) {
         List<Employe> employes= new ArrayList<>();
         try {
-            String selectSql = "SELECT * FROM employe where matricule like ? nom like ? Or prenom like ? OR dateNaissance like ? Or telephone like ? Or dateDeRecrutement like ? Or adresseEmail like ?";
+            String selectSql = "SELECT * FROM employe WHERE matricule LIKE ? OR nom LIKE ? OR prenom LIKE ? OR dateNaissance = CAST(? AS DATE) OR telephone LIKE ? OR dateDeRecrutement = CAST(? AS DATE) OR adresseEmail LIKE ?;";
             PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
-            preparedStatement.setString(1, employe.getMatricule());
-            preparedStatement.setString(2, employe.getNom());
-            preparedStatement.setString(3, employe.getPrenom());
-            preparedStatement.setDate(4,employe.getDateNaissance());
-            preparedStatement.setString(5, employe.getTelephone());
-            preparedStatement.setDate(6,employe.getDateDeRecrutement());
-            preparedStatement.setString(7,employe.getAdresseEmail());
+            preparedStatement.setString(1, param);
+            preparedStatement.setString(2, param);
+            preparedStatement.setString(3, param);
+            preparedStatement.setString(4,param);
+            preparedStatement.setString(5, param);
+            preparedStatement.setString(6,param);
+            preparedStatement.setString(7,param);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 Employe emp=new Employe();

@@ -32,6 +32,20 @@ public class Smission {
         optionalM.ifPresent(v -> System.out.println(String.format("*****   MISSION SUPPRIMEE  *****")));
     }
 
+    public void afficherListe() {
+        Optional<Mission[]> Opmissions = impMission.afficherList();
+        Opmissions.ifPresent(missions -> {
+            for (Mission cl : missions) {
+                System.out.println(String.format(
+                        "%s %s %s",
+                        cl.getCode(),
+                        cl.getNom(),
+                        cl.getDescription()
+                ));
+            }
+        });
+    }
+
 
 
 

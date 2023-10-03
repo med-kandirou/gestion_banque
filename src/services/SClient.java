@@ -61,10 +61,11 @@ public class SClient {
         optionalcl.ifPresent(clients -> {
             for (Client cl : clients) {
                 System.out.println(String.format(
-                        "%s %s %s %s %s",
+                        "%s %s %s %s %s %s",
                         cl.getCode(),
                         cl.getNom(),
                         cl.getPrenom(),
+                        cl.getTelephone(),
                         cl.getDateNaissance(),
                         cl.getAdresse()
                 ));
@@ -79,7 +80,7 @@ public class SClient {
         Optional<Client[]> optionalcl = impclient.rechercheParAtt(code);
         optionalcl.ifPresent(clients -> {
             for (Client cl : clients) {
-                System.out.println(String.format(cl.getCode()+" "+cl.getNom()+" "+cl.getPrenom()+" "+cl.getDateNaissance()+" "+cl.getAdresse()));
+                System.out.println(String.format(cl.getCode()+" "+cl.getNom()+" "+cl.getPrenom()+" "+cl.getTelephone()+" "+cl.getDateNaissance()+" "+cl.getAdresse()));
             }
         });
     }

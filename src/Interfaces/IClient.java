@@ -15,7 +15,7 @@ public interface IClient {
 
     Optional<Client[]> afficherListe();
 
-    Optional<Client[]> rechercheParAtt(Object param);
+    Optional<Client[]> rechercheParAtt(String param);
 
     Optional<Client> update(Client client);
 }

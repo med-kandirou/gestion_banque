@@ -14,7 +14,7 @@ public interface IEmploye {
 
     Optional<Employe[]> afficherListe();
 
-    Optional<Employe[]> rechercheParAtt(Employe employe);
+    Optional<Employe[]> rechercheParAtt(String param);
 
     Optional<Employe> update(Employe employe);
 }

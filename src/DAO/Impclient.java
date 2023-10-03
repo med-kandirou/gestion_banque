@@ -89,6 +89,7 @@ public class Impclient implements IClient {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 Client client=new Client();
+                client.setCode(resultSet.getString("code"));
                 client.setNom(resultSet.getString("nom"));
                 client.setPrenom(resultSet.getString("prenom"));
                 client.setTelephone(resultSet.getString("telephone"));
@@ -108,16 +109,16 @@ public class Impclient implements IClient {
     }
 
     @Override
-    public Optional<Client[]> rechercheParAtt(Object param) {
+    public Optional<Client[]> rechercheParAtt(String param) {
         List<Client> Clients= new ArrayList<>();
         try {
             String selectSql = "SELECT * FROM client WHERE code LIKE ? OR nom LIKE ? OR prenom LIKE ? OR telephone LIKE ? OR adresse LIKE ?";
             PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
-            preparedStatement.setString(1,param.toString());
-            preparedStatement.setString(2, param.toString());
-            preparedStatement.setString(3,param.toString());
-            preparedStatement.setString(5, param.toString());
-            preparedStatement.setString(6,param.toString());
+            preparedStatement.setString(1,param);
+            preparedStatement.setString(2, param);
+            preparedStatement.setString(3,param);
+            preparedStatement.setString(4, param);
+            preparedStatement.setString(5,param);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 Client cl=new Client();
